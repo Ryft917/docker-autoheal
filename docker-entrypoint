@@ -80,7 +80,7 @@ notify_webhook() {
   if [ -n "$APPRISE_URL" ]
   then
     # execute webhook requests as background process to prevent healer from blocking
-    curl -s -X POST -H "Content-type: application/json" -d "$(generate_apprise_payload $text)"  $APPRISE_URL
+    curl -s -X POST -H "Content-type: application/json" -d '$(generate_apprise_payload $text)'  $APPRISE_URL
   fi
 }
 
@@ -106,7 +106,6 @@ generate_apprise_payload() {
   local text="$@"
   cat <<EOF
 {
-  "title":"Autoheal",
   "body":"$text"
 }
 EOF
